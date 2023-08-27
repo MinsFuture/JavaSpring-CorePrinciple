@@ -17,14 +17,14 @@ public class ApplicationContextBasicFindTest {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
     @Test
-    @DisplayName("빈 이름으로 조회")
+    @DisplayName("Bean 이름으로 조회")
     void findBeanByName() {
         MemberService memberService = ac.getBean("memberService", MemberService.class);
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
     @Test
-    @DisplayName("빈 이름없이 타입으로만 조회")
+    @DisplayName("이름 없이 타입으로만 조회")
     void findBeanByType() {
         MemberService memberService = ac.getBean(MemberService.class);
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
@@ -33,15 +33,16 @@ public class ApplicationContextBasicFindTest {
     @Test
     @DisplayName("구체 타입으로 조회")
     void findBeanByName2() {
-        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        // 구현에 의존하는 것이기 때문에 좋은 코드는 아님
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
     @Test
-    @DisplayName("빈 이름으로 조회X")
+    @DisplayName("빈 이름으로 조회 X")
     void findBeanByNameX() {
-        //ac.getBean("xxxxx", MemberService.class);
+        // ac.getBean("xxxxx", MemberService.class);
         assertThrows(NoSuchBeanDefinitionException.class,
-                ()->ac.getBean("xxxxx", MemberService.class));
+                () -> ac.getBean("xxxxx", MemberService.class));
     }
 }
