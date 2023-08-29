@@ -12,21 +12,8 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration // Configuration을 주석처리 하면, 순수한 자바 코드가 돌기때문에 싱글톤이 깨진
 public class AppConfig {
-    // call AppConfig.memberService
-    // call AppConfig.memberRepository
-
-    // call AppConfig.memberRepository
-
-    // call AppConfig.orderService
-    // call AppConfig.memberRepository
-
-    // vs
-
-    // call AppConfig.memberService
-    // call AppConfig.memberRepository
-    // call AppConfig.orderService
 
     @Bean
     public MemberService memberService() {
